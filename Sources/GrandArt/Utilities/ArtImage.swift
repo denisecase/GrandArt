@@ -104,9 +104,6 @@ struct ArtImage {
         }
       }
     }
-    
-    
-    
 
     let iterationsMax = shapeInputs.iterationsMax
     let scale = shapeInputs.scale
@@ -174,6 +171,8 @@ struct ArtImage {
               break
             }
 
+            // New grandPower exponent code .....
+            
             let (newX, newY) = complexPow(baseX: xx, baseY: yy, power: grandPower)
             xx = newX + x0
             yy = newY + y0
