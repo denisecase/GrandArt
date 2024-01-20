@@ -104,6 +104,7 @@ struct ArtImage {
         }
       }
     }
+    
 
     let iterationsMax = shapeInputs.iterationsMax
     let scale = shapeInputs.scale
