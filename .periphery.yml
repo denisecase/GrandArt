@@ -1,0 +1,6 @@
+project: GrandArt.xcodeproj
+retain_objc_accessible: true
+schemes:
+- GrandArt
+targets:
+- GrandArt

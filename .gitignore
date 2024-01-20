@@ -1,0 +1,35 @@
+# VS Code
+.vscode/
+
+# Documentation
+docs/
+Examples/
+
+# Derived Data
+DerivedData/
+
+# macOS files
+.DS_Store
+
+# Xcode user settings
+xcuserdata/
+xcuserdata/*
+
+# Build products
+build/
+DerivedData/
+
+# Obj-C/Swift specific
+*.hmap
+
+# App packaging
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Swift Package Manager
+.build/
