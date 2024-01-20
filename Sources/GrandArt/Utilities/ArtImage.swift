@@ -29,6 +29,7 @@ var fIterGlobal = [[Double]]()
 /// `ArtImage` is a struct responsible for generating the Mandelbrot art images.
 @available(macOS 12.0, *)
 struct ArtImage {
+  let grandPower = ArtInputs.grandPower
   let shapeInputs: ArtImageShapeInputs
   let colorInputs: ArtImageColorInputs
 
@@ -52,6 +53,34 @@ struct ArtImage {
       yY_input: picdef.yY
     )
   }
+
+  func complexPow(baseX: Double, baseY: Double, power: Float) -> (Double, Double) {
+    if power == 2.0 {
+      // Calculation for power of 2 (z = z^2)
+      let xTemp = baseX * baseX - baseY * baseY
+      let newY = 2.0 * baseX * baseY
+      return (xTemp, newY)
+    } else if power == 3.0 {
+      // Calculation for power of 3 (z = z^3)
+      let xSquared = baseX * baseX
+      let ySquared = baseY * baseY
+
+      let xTemp = (xSquared - 3.0 * ySquared) * baseX
+      let newY = (3.0 * xSquared - ySquared) * baseY
+      return (xTemp, newY)
+    } else {
+      // Calculation for arbitrary powers
+      let r = sqrt(baseX * baseX + baseY * baseY)
+      let theta = atan2(baseY, baseX)
+      let newR = pow(r, Double(power))
+      let newTheta = Double(power) * theta
+
+      let newX = newR * cos(newTheta)
+      let newY = newR * sin(newTheta)
+      return (newX, newY)
+    }
+  }
+
 
   /**
    Function to create and return a user-created GrandArt bitmap
@@ -142,11 +171,19 @@ struct ArtImage {
               break
             }
 
-            xTemp = xx * xx - yy * yy + x0
-            yy = 2 * xx * yy + y0
-            xx = xTemp
+            let (newX, newY) = complexPow(baseX: xx, baseY: yy, power: grandPower)
+            xx = newX + x0
+            yy = newY + y0
+
             rSq = xx * xx + yy * yy
             iter = Double(i)
+
+
+//            xTemp = xx * xx - yy * yy + x0
+//            yy = 2 * xx * yy + y0
+//            xx = xTemp
+//            rSq = xx * xx + yy * yy
+//            iter = Double(i)
           }
         } // end else
 
@@ -458,159 +495,6 @@ struct ArtImage {
     let yStarting = 0
     let width: Int = imageWidth
     let height: Int = imageHeight
- /*   
-//  zzzzzzzzzzzzzzzzzzzzzzzz  Our code for finding max slope   
-
-    var fIterGlobalCenter = [Double]()
-    var fIterGlobalNeighbors = [[Double]]()
-    var fIterGlobalNeighborsSorted = [[Double]]()
-    var fIterGlobalNeighborsMax = [Double]()
-    var dFIterGlobal = 0.0
-    var dFIterGlobalMax = 0.0
-    var u = 0
-    var v = 0
-        
-        
- //       print()
- //      print("fIterGlobalCenter", fIterGlobalCenter)
-        
-        for v in 1...(imageHeight - 1)  {
-          for u in 1...(imageHeight - 1) {
-        
-        fIterGlobalCenter = [Double(u), Double(v), fIterGlobal[u][v]]
-
-        fIterGlobalNeighbors = [
-        [Double(u), Double(v+1), fIterGlobal[u][v+1]], 
-        [Double(u), Double(v-1), fIterGlobal[u][v-1]], 
-        [Double(u+1), Double(v), fIterGlobal[u+1][v]], 
-        [Double(u-1), Double(v), fIterGlobal[u-1][v]], 
-        ]
-        
-        fIterGlobalNeighborsSorted = fIterGlobalNeighbors.sorted(){ $0[2] > $1[2] }
-        
-        if (fIterGlobalCenter[2] == iterationsMax) || (fIterGlobalNeighborsSorted[0][2] == iterationsMax){
-          break
-        }
-                
-        fIterGlobalNeighborsMax = fIterGlobalNeighborsSorted[0]
-        
-        if fIterGlobalNeighborsMax[2] > fIterGlobalCenter[2] {
-          dFIterGlobal = fIterGlobalNeighborsMax[2] - fIterGlobalCenter[2]
-          if dFIterGlobal > dFIterGlobalMax {
-            dFIterGlobalMax = dFIterGlobal
-          }
-          } 
-        
-  //      print()
-   //     print("fIterGlobalCenter", fIterGlobalCenter)
-  //      print("dFIterGlobal", dFIterGlobal)
-//        print(fIterGlobalNeighbors)
-//        print()
-//        print(fIterGlobalNeighborsSorted)
-//        print("fIterGlobalNeighborsSorted[0][2]", fIterGlobalNeighborsSorted[0][2])
- //       print("fIterGlobalNeighborsMax", fIterGlobalNeighborsMax)
-        
-        } // end u
-        } // end v
-        
-        print()
-        print("dFIterGlobalMax", dFIterGlobalMax)
-        
-
-
-
-//  zzzzzzzzzzzzzzzzzzzzzzzz  Our code for finding max slope
-*/
-/*    
- // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx   Our code for finding flow path.
-
-    var fIterGlobalPresent = [Double]()
-    var fIterGlobalNeighborsMax = [Double]()
-    var fIterGlobalNeighbors = [[Double]]()
-    var fIterGlobalNeighborsSorted = [[Double]]()
-    var dFIterGlobal = 0.0
-    var u = 417
-    var v = 997
-    var distance = 0.0
-        
-        fIterGlobalPresent = [distance, Double(u), Double(v), fIterGlobal[u][v]]
-        print()
-        print("fIterGlobalPresent", fIterGlobalPresent)
-        
-        repeat  {
-        
-        // Find the location of the neighbor with the max value of fIterGlobal.
-
-        fIterGlobalNeighbors = [
-        [distance, Double(u), Double(v+1), fIterGlobal[u][v+1]], 
-        [distance, Double(u), Double(v-1), fIterGlobal[u][v-1]], 
-        [distance, Double(u+1), Double(v), fIterGlobal[u+1][v]], 
-        [distance, Double(u-1), Double(v), fIterGlobal[u-1][v]], 
-        
-        [distance, Double(u+1), Double(v+2), fIterGlobal[u+1][v+2]], 
-        [distance, Double(u+1), Double(v-2), fIterGlobal[u+1][v-2]],
-        [distance, Double(u-1), Double(v+2), fIterGlobal[u-1][v+2]], 
-        [distance, Double(u-1), Double(v-2), fIterGlobal[u-1][v-2]], 
-        [distance, Double(u+2), Double(v+1), fIterGlobal[u+2][v+1]], 
-        [distance, Double(u+2), Double(v-1), fIterGlobal[u+2][v-1]],
-        [distance, Double(u-2), Double(v+1), fIterGlobal[u-2][v+1]], 
-        [distance, Double(u-2), Double(v-1), fIterGlobal[u-2][v-1]]
-        ]
-        
-        fIterGlobalNeighborsSorted = fIterGlobalNeighbors.sorted { $0[3] > $1[3] }
-        
-        fIterGlobalNeighborsMax = fIterGlobalNeighborsSorted[0]
-        
-        if fIterGlobalNeighborsMax[3] > fIterGlobalPresent[3] {
-          dFIterGlobal = fIterGlobalNeighborsMax[3] - fIterGlobalPresent[3]
-          distance = distance + 2
-          u = Int(fIterGlobalNeighborsMax[1])
-          v = Int(fIterGlobalNeighborsMax[2])
-          fIterGlobalPresent = fIterGlobalNeighborsMax 
-          } else {
-            break
-          }
-        
-        print()
-        print("fIterGlobalPresent", fIterGlobalPresent)
-        print("dFIterGlobal", dFIterGlobal)
-//        print(fIterGlobalNeighbors)
-//        print()
-//        print(fIterGlobalNeighborsSorted)
-//        print("fIterGlobalNeighborsSorted[0][2]", fIterGlobalNeighborsSorted[0][2])
- //       print("fIterGlobalNeighborsMax", fIterGlobalNeighborsMax)
-        
-        } while dFIterGlobal > 0.0
-   
-   
-    // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  Our code for finding flow path
-*/
-      
-    // yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy ChatGPT
-      
- /*     From ChatGPT:
-   let array1 = [1, 2, 2.7]
-let array2 = [3, 7, 42.1]
-let array3 = [5, 1, 21.2]
-let array4 = [3, 2, 18.6]
-
-// Create an array of arrays
-let arrayOfArrays = [array1, array2, array3, array4]
-
-// Sort the array of arrays in descending order based on the third element (index 2)
-let sortedArrayDescending = arrayOfArrays.sorted { $0[2] > $1[2] }
-
-// Print the sorted array in descending order
-print(sortedArrayDescending)
-
-
-// yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy  ChatGPT
-
-*/
-
-
- 
- 
 
     // iterate over all rows for the entire height of the square
     for v in 0 ... (height - 1) {

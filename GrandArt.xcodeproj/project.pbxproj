@@ -16,6 +16,7 @@
 		8806E116293A5011005F5CB4 /* GrandArtDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8806E114293A5011005F5CB4 /* GrandArtDocument.swift */; };
 		882BAED3293409FE003ACB0B /* PictureDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882BAED2293409FE003ACB0B /* PictureDefinition.swift */; };
 		882BAED929346C92003ACB0B /* Hue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882BAED829346C92003ACB0B /* Hue.swift */; };
+		8839D2792B5C4D8900C5D361 /* ArtInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8839D2782B5C4D8900C5D361 /* ArtInputs.swift */; };
 		8845506629AE3C8D008F202A /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 8845506529AE3C8D008F202A /* Resources */; };
 		884752A629AFE73400FBECC2 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884752A529AFE73400FBECC2 /* WelcomeView.swift */; };
 		88511CB32948B3FF009B5CF6 /* MandMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88511CB22948B3FF009B5CF6 /* MandMath.swift */; };
@@ -87,6 +88,7 @@
 		8806E114293A5011005F5CB4 /* GrandArtDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrandArtDocument.swift; sourceTree = "<group>"; };
 		882BAED2293409FE003ACB0B /* PictureDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureDefinition.swift; sourceTree = "<group>"; };
 		882BAED829346C92003ACB0B /* Hue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hue.swift; sourceTree = "<group>"; };
+		8839D2782B5C4D8900C5D361 /* ArtInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtInputs.swift; sourceTree = "<group>"; };
 		8845506529AE3C8D008F202A /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Resources; sourceTree = "<group>"; };
 		884752A529AFE73400FBECC2 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		88511CB22948B3FF009B5CF6 /* MandMath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MandMath.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				88A2719D2A96871A00766654 /* ArtGrid.swift */,
+				8839D2782B5C4D8900C5D361 /* ArtInputs.swift */,
 				88A2719F2A968A6900766654 /* ArtImage.swift */,
 				88A133CD2A9677C500A6E3CA /* GradientGrid.swift */,
 				88A133CF2A96780C00A6E3CA /* GradientImage.swift */,
@@ -397,6 +400,7 @@
 				88A2719E2A96871A00766654 /* ArtGrid.swift in Sources */,
 				88C358142A985CD1007E7A92 /* ImageViewModel.swift in Sources */,
 				88C3580B2A97E9F9007E7A92 /* TabSavePopup.swift in Sources */,
+				8839D2792B5C4D8900C5D361 /* ArtInputs.swift in Sources */,
 				88EF98402AC133D5005A3ABC /* GrandArtError.swift in Sources */,
 				880250EB2AA2050A0076E001 /* PopupColorSlice.swift in Sources */,
 				88EF982C2AC0D78E005A3ABC /* String+Subscripting.swift in Sources */,
