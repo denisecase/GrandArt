@@ -29,7 +29,9 @@ var fIterGlobal = [[Double]]()
 /// `ArtImage` is a struct responsible for generating the Mandelbrot art images.
 @available(macOS 12.0, *)
 struct ArtImage {
-  let grandPower = ArtInputs.grandPower
+  let grandPowerReal = ArtInputs.grandPowerReal
+  let grandPowerImaginary = ArtInputs.grandPowerImaginary
+
   let shapeInputs: ArtImageShapeInputs
   let colorInputs: ArtImageColorInputs
 
@@ -54,26 +56,39 @@ struct ArtImage {
     )
   }
 
-  func complexPow(baseX: Double, baseY: Double, power: Float) -> (Double, Double) {
-    if power == 2.0 {
-      // Calculation for power of 2 (z = z^2)
-      let xTemp = baseX * baseX - baseY * baseY
-      let newY = 2.0 * baseX * baseY
-      return (xTemp, newY)
-    } else if power == 3.0 {
-      // Calculation for power of 3 (z = z^3)
-      let xSquared = baseX * baseX
-      let ySquared = baseY * baseY
+  func complexPow(baseX: Double, baseY: Double, powerReal: Float, powerImaginary: Float = 0.0) -> (Double, Double) {
+    if powerImaginary == 0 {
 
-      let xTemp = (xSquared - 3.0 * ySquared) * baseX
-      let newY = (3.0 * xSquared - ySquared) * baseY
-      return (xTemp, newY)
+      if powerReal == 2.0 {
+        // Calculation for power of 2 (z = z^2)
+        let xTemp = baseX * baseX - baseY * baseY
+        let newY = 2.0 * baseX * baseY
+        return (xTemp, newY)
+      } else if powerReal == 3.0 {
+        // Calculation for power of 3 (z = z^3)
+        let xSquared = baseX * baseX
+        let ySquared = baseY * baseY
+
+        let xTemp = (xSquared - 3.0 * ySquared) * baseX
+        let newY = (3.0 * xSquared - ySquared) * baseY
+        return (xTemp, newY)
+      } else {
+        // Calculation for arbitrary powers
+        let r = sqrt(baseX * baseX + baseY * baseY)
+        let theta = atan2(baseY, baseX)
+        let newR = pow(r, Double(powerReal))
+        let newTheta = Double(powerReal) * theta
+
+        let newX = newR * cos(newTheta)
+        let newY = newR * sin(newTheta)
+        return (newX, newY)
+      }
     } else {
-      // Calculation for arbitrary powers
+      // Calculation for complex powers (real + imaginary)
       let r = sqrt(baseX * baseX + baseY * baseY)
       let theta = atan2(baseY, baseX)
-      let newR = pow(r, Double(power))
-      let newTheta = Double(power) * theta
+      let newR = pow(r, Double(powerReal)) * exp(-Double(powerImaginary) * theta)
+      let newTheta = Double(powerReal) * theta + Double(powerImaginary) * log(r)
 
       let newX = newR * cos(newTheta)
       let newY = newR * sin(newTheta)
@@ -171,7 +186,8 @@ struct ArtImage {
               break
             }
 
-            let (newX, newY) = complexPow(baseX: xx, baseY: yy, power: grandPower)
+            let (newX, newY) = complexPow(baseX: xx, baseY: yy, powerReal: ArtInputs.grandPowerReal, powerImaginary: ArtInputs.grandPowerImaginary)
+
             xx = newX + x0
             yy = newY + y0
 
