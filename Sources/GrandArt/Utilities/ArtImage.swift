@@ -186,11 +186,12 @@ struct ArtImage {
               break
             }
 
+            // New grandPower exponent code .....
+
             let (newX, newY) = complexPow(baseX: xx, baseY: yy, powerReal: ArtInputs.grandPowerReal, powerImaginary: ArtInputs.grandPowerImaginary)
 
             xx = newX + x0
             yy = newY + y0
-
             rSq = xx * xx + yy * yy
             iter = Double(i)
 
