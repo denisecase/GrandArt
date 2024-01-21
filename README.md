@@ -23,6 +23,8 @@ And specify the real and imaginary part of the exponent.
 
 The real part of the exponent will influence the "spreading" of the set, while the imaginary part will introduce a "rotation" or "twist."
 
+![GrandArt - different exponents](Resources/GrandArtDay1.JPG)
+
 - Applied Physics Engineering
 - [Bruce Johnson](https://github.com/bruceranger)
 - [App Store Connect](https://appstoreconnect.apple.com)
