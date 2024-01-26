@@ -7,6 +7,21 @@
 ranger_key=~/.ssh/id_rsa_ranger
 personal_key=~/.ssh/id_rsa_personal
 
+# Check if SSH keys already exist and delete them
+if [[ -f $ranger_key && -f $personal_key ]]; then
+    echo "Existing SSH keys found and will be deleted."
+    rm $ranger_key $ranger_key.pub
+    rm $personal_key $personal_key.pub
+fi
+
+# Check if SSH configurations for GitHub already exist and delete them
+ssh_config=~/.ssh/config
+if grep -q "github.com-BruceRanger" $ssh_config && grep -q "github.com-Personal" $ssh_config; then
+    echo "Existing SSH configurations for GitHub found and will be deleted."
+    sed -i '/github.com-BruceRanger/,/github.com-Personal/d' $ssh_config
+fi
+
+
 # Generate SSH keys with custom filenames
 ssh-keygen -t rsa -b 4096 -C "work@comcast.net" -f $ranger_key
 ssh-keygen -t rsa -b 4096 -C "personal@comcast.net" -f $personal_key
