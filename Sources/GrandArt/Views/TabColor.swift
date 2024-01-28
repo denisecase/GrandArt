@@ -13,7 +13,7 @@ struct TabColor: View {
     for (index, _) in doc.picdef.hues.enumerated() {
       doc.picdef.hues[index].num = index + 1
     }
-    self.didChange.toggle()
+    didChange.toggle()
   }
 
   var calculatedRightNumber: Int {
@@ -38,11 +38,9 @@ struct TabColor: View {
             Button("Add New Color") {
               doc.addHue()
               self.updateArt()
-
-
             }
-              .help("Add a new color.")
-              .padding([.bottom], 2)
+            .help("Add a new color.")
+            .padding([.bottom], 2)
           }
 
           TabColorList(doc: doc, requiresFullCalc: $requiresFullCalc, showGradient: $showGradient)

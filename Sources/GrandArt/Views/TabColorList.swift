@@ -49,6 +49,4 @@ struct TabColorList: View {
       doc.picdef.hues[index].num = index + 1
     }
   }
-
-  
 }

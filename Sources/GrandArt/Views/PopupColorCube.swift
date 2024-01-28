@@ -22,8 +22,6 @@ struct PopupColorCube: View {
   }
 
   var body: some View {
-
-
     ZStack(alignment: .top) {
       Color(NSColor.windowBackgroundColor)
         .edgesIgnoringSafeArea(.all)
@@ -59,7 +57,6 @@ struct PopupColorCube: View {
 
   private var colorCubeContent: some View {
     VStack(spacing: 10) {
-
       if currentColors.count == 512 {
         ForEach(0 ..< 2, id: \.self) { rowIndex in
           HStack(spacing: 10) {
@@ -87,10 +84,9 @@ struct PopupColorCube: View {
           }
         }
       } // end else if 9
-
     }
     .padding(.top, 2)
-  }  // end color cube content
+  } // end color cube content
 
   private func getColors(from cgColors: [CGColor]) -> [Color] {
     return cgColors.map { Color($0) }

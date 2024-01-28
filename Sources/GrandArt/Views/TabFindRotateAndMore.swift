@@ -7,7 +7,6 @@ struct TabFindRotateAndMore: View {
   @Binding var requiresFullCalc: Bool
 
   var body: some View {
-  
     HStack {
       Text("Maximum tries:")
 
@@ -27,7 +26,7 @@ struct TabFindRotateAndMore: View {
       }
     } // end hstack sharpening
     .padding(.horizontal)
-  
+
     HStack {
       Text("Rotation")
         .help("Enter degress to rotate counter-clockwise.")
@@ -45,8 +44,6 @@ struct TabFindRotateAndMore: View {
         requiresFullCalc = true
       }
     } // end hstack theta
-
-
 
     HStack {
       Text("Color smoothing limit:")

@@ -9,8 +9,6 @@ struct PopupColorSlice: View {
   let start: Int
   let end: Int
 
-
-
   init(
     doc: GrandArtDocument,
     selectedColor: Binding<(r: Int, g: Int, b: Int)?>,
@@ -35,7 +33,6 @@ struct PopupColorSlice: View {
   }
 
   var body: some View {
-
     if arrColors.count == 512 {
       var nColumns = 8
       var nRows = 8
@@ -73,7 +70,6 @@ struct PopupColorSlice: View {
         } // vstack
       ) // any view
     } // end if 512 (8 x 8 x 8)
-
 
     if arrColors.count == 729 {
       var nColumns = 9
@@ -119,7 +115,5 @@ struct PopupColorSlice: View {
       print(arrColors)
       return AnyView(Text("Invalid color data").foregroundColor(.red))
     }
-
-
   } // end body
 }

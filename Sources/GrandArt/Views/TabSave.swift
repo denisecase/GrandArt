@@ -18,17 +18,15 @@ struct TabSave: View {
             .fontWeight(.medium)
             .padding(.bottom)
         ) {
-          
           Button("Save Picture Inputs (as data file)") {
             doc.saveGrandArtImageInputs()
           }
           .help("Save GrandArt picture inputs as .grandart.")
-          
+
           Button("Save Picture (as .png)") {
             doc.saveGrandArtImage()
           }
           .help("Save GrandArt picture as .png.")
-
         } // end section
       } //  vstack
     } // scroll

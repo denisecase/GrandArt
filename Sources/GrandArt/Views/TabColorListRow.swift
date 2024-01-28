@@ -21,13 +21,12 @@ struct TabColorListRow: View {
     for (index, _) in doc.picdef.hues.enumerated() {
       doc.picdef.hues[index].num = index + 1
     }
-    self.didChange.toggle()
+    didChange.toggle()
   }
 
   var isIndexValid: Bool {
     doc.picdef.hues.indices.contains(index)
   }
-
 
   /// Updates the hue numbers asynchronously.
   func updateHueNums() {
@@ -46,7 +45,6 @@ struct TabColorListRow: View {
   }
 
   var body: some View {
-
     if isIndexValid {
       HStack {
         Image(systemName: "line.horizontal.3")
@@ -54,14 +52,17 @@ struct TabColorListRow: View {
 
         Text(String(rowNumber))
 
-        ColorPicker("", selection: Binding<Color>(
-          get: { self.hue.color },
-          set: { newColor in
-            let updatedHue = self.hue
-            updatedHue.color = newColor
-            doc.updateHueWithColorPick(index: index, newColorPick: newColor, undoManager: nil)
-
-          }),          supportsOpacity: false
+        ColorPicker(
+          "",
+          selection: Binding<Color>(
+            get: { self.hue.color },
+            set: { newColor in
+              let updatedHue = self.hue
+              updatedHue.color = newColor
+              doc.updateHueWithColorPick(index: index, newColorPick: newColor, undoManager: nil)
+            }
+          ),
+          supportsOpacity: false
         )
 
         Button {

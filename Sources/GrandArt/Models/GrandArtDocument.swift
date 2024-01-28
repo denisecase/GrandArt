@@ -48,7 +48,7 @@ final class GrandArtDocument: ReferenceFileDocument, ObservableObject {
       Hue(num: 6, r: 0.0, g: 255.0, b: 255.0),
     ]
     picdef = PictureDefinition(hues: hues)
-    }
+  }
 
   /// Initializer to read a document from disk
   init(configuration: ReadConfiguration) throws {
