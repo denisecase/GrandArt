@@ -13,6 +13,12 @@
 
 SwiftUI macOS app to create custom art using variations of the Mandelbrot set.
 
+See also:
+
+- MandArt
+- MandArt3
+- color-cube
+
 Go to [Sources/GrandArt/Utilities/ArtInputs.swift](Sources/GrandArt/Utilities/ArtInputs.swift)
 
 And specify the real and imaginary part of the exponent.
