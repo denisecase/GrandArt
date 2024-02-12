@@ -19,6 +19,9 @@ See also:
 - MandArt3
 - color-cube
 
+
+
+
 Go to [Sources/GrandArt/Utilities/ArtInputs.swift](Sources/GrandArt/Utilities/ArtInputs.swift)
 
 And specify the real and imaginary part of the exponent.
